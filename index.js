@@ -1,6 +1,6 @@
 
 // Matthew Kopay
-// comm6338 Weather API App
+// comm6338 Assignment 8 Weather API App
 // API Key used on openweathermap.org  1420b504f8348fba49e933d0d098f16f
 
 
@@ -28,7 +28,7 @@ formEl.onsubmit = function (e) {
     inputEl.value = ""
 }
 
-//Calls the OpenWeather API and return object of wether info
+//Calls the OpenWeather Version 3.0 API and return object of weather data
 function getWeather(query){
     //default for US
     if(!query.includes(",")) query += ',us'
@@ -36,7 +36,7 @@ function getWeather(query){
     //return the fetch call which returns a promise
     //allows us to call .then on this function
     return fetch(
-        'https://api.openweathermap.org/data/2.5/weather?q=' + query + '&units=imperial&APPID=1420b504f8348fba49e933d0d098f16f'
+        'https://api.openweathermap.org/data/3.0/weather?q=' + query + '&units=imperial&APPID=1420b504f8348fba49e933d0d098f16f'
     )
     .then(function(res){
         return res.json()
@@ -72,7 +72,7 @@ function getWeather(query){
     })
 }
 
-// Show error message when location isnt found
+// Show error message when location is not available
 function displayLocNotFound(){
     //clear any previous weather info
     weatherContainer.innerHTML = "";
@@ -83,7 +83,7 @@ function displayLocNotFound(){
     weatherContainer.appendChild(errMsg)
 }
 
-//update Html to display weather info
+//update HTML to display weather info
 function displayWeatherInfo(weatherObj){
     //clears any previous weather info
     weatherContainer.innerHTML = "";
@@ -95,12 +95,12 @@ function displayWeatherInfo(weatherObj){
         )
     }
 
-    //Weather location element
+    //weather location element
     var placeName= document.createElement('h2')
     placeName.textContent = weatherObj.place
     weatherContainer.appendChild(placeName)
 
-    //Link element for location
+    //link element for location
     var whereLink = document.createElement('a')
     whereLink.textContent = "Click to view map"
     whereLink.href = "https://www.google.com/maps/search/?api=1&query=" + weatherObj.coords
