@@ -136,7 +136,7 @@ function displayWeatherInfo(weatherObj){
 
     addBreak()
 
-    // time updated
+    // updated time
     var updatedAt = document.createElement('p')
     updatedAt.textContent = "Last updated: " +
     weatherObj.updatedAt.toLocaleTimeString (
